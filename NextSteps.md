@@ -32,6 +32,6 @@ The above is all before we even address the customers concerns of using Gen3.
 
 ### Phase 1
 * Operationalizing Gen3 Stack on Azure (Automated deployment and E2E test, monitoring/alerting, addresses baseline security concerns, operational guides)
-* Validation (Rush scenarios with public and anonymous data, Rush upskill on using Gen3 as a customer)
+* Validation (Customer scenarios with public and anonymous data, Customer upskill on using Gen3 as a customer)
 * Sharing (Where do the Gen3 Azure changes land? Work with Gen3 community)
 
