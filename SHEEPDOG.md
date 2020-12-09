@@ -12,7 +12,9 @@ https://uc-cdis.github.io/sheepdog/build/html/index.html
 * PostgreSQL
 * AWS S3
 * [indexclient](github.com/uc-cdis/indexclient) library
-* [storage-client](https://github.com/uc-cdis/storage-client) library
+* [storage-client](https://github.com/uc-cdis/storage-client) library (Connects to S3 via [boto](https://github.com/boto/boto))
+
 
 ## Notes 
 * Has hard coded S3 references
+* The data model refers to Gen3 model and data dictionary
