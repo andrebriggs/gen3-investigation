@@ -20,8 +20,14 @@ We might have to have multiple tracks:
 
 The above is all before we even address the customers concerns of using Gen3.
 
-## Phases
+## Potential Phases
+
+### Phase 0
 * Updating Gen3 Stack for Azure (Code changes to get Gen3 to run on Azure, Automated testing)
+  * Create a backlog of what changes we need to make in microservices to support Azure Blob, Azure PostgreSQL, etc
+
+### Phase 1
 * Operationalizing Gen3 Stack on Azure (Automated deployment and E2E test, monitoring/alerting, addresses baseline security concerns, operational guides)
 * Validation (Rush scenarios with public and anonymous data, Rush upskill on using Gen3 as a customer)
 * Sharing (Where do the Gen3 Azure changes land? Work with Gen3 community)
+
