@@ -20,6 +20,10 @@ We might have to have multiple tracks:
 
 The above is all before we even address the customers concerns of using Gen3.
 
+## More thoughts
+* There is diversity in the CI/CD used across all the microservices (e.g. Travis, GitHub Actions, Jenkins)
+* We need a generated microservices architecture digram. 
+
 ## Potential Phases
 
 ### Phase 0
