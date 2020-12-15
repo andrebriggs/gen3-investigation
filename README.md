@@ -36,18 +36,18 @@
 3. Enter _123_ and _Program1_ ![image](images/user_form_1.png)
 4. Click _Upload submission json from form_ and see json result ![image](images/user_form_2.png)
 
-### Visit Your Program**
+### Visit Your Program
 1. Visit `https://localhost/Program1`
+2. Verify it exists
 
 ### Generate Test Metadata
-1.
+1. Generate test metadata
 ```console
-export TEST_DATA_PATH="$(pwd)/testData"
-mkdir -p "$TEST_DATA_PATH"
+$ export TEST_DATA_PATH="$(pwd)/testData"
+$ mkdir -p "$TEST_DATA_PATH"
 
-docker run -it -v "${TEST_DATA_PATH}:/mnt/data" --rm --name=dsim --entrypoint=data-simulator quay.io/cdis/data-simulator:master simulate --url https://s3.amazonaws.com/dictionary-artifacts/datadictionary/develop/schema.json --path /mnt/data --program jnkns --project jenkins --max_samples 10
+$ docker run -it -v "${TEST_DATA_PATH}:/mnt/data" --rm --name=dsim --entrypoint=data-simulator quay.io/cdis/data-simulator:master simulate --url https://s3.amazonaws.com/dictionary-artifacts/datadictionary/develop/schema.json --path /mnt/data --program jnkns --project jenkins --max_samples 10
 ```
-
 
 ### Download and configure up Gen3 Client
 ```console
@@ -59,10 +59,9 @@ A `.gen3` directory should existing in your current user directory (e.g. `/Users
 View your configuration using `cat /Users/<current-user>/.gen3/config `
 
 ### Verify Gen3 Client Access
-
 Verify you have access:
 ```console
-./gen3-client auth --profile=cse_profile
+$ ./gen3-client auth --profile=cse_profile
 2020/12/12 15:01:23 
 You don't currently have access to data from any projects at http://localhost
 ```
