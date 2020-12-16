@@ -47,11 +47,12 @@
 2. Verify it exists
 3. **Optional but STRONGLY reccomended**: Check the database using `select * from node_program;`
 
-### Create Program
+### Create Project
 1. While local instance is running, visit `https://localhost/Program1`
 2. Enable _User Form Submission_ button and select _project_ from drop-down 
 3. Enter _P1_, _phs1_, and _project1_ ![image](images/program.png)
-4. Click _Upload submission json from form_ and see the green result. Note: You may have to hit the button SEVERAL times to see the green result. ![image](images/program_1.png) 
+4. Click _Upload submission json from form_ and see the green result. Note: You may have to hit the button SEVERAL times to see the green result. ![image](images/program_1.png)
+5. Verify your project is Created by clicking the blue Details button and/or checking the databse with `select * from node_project;`
 
 ### Generate Test Metadata
 1. Generate test metadata
@@ -141,6 +142,19 @@ acl|{}
 _sysan|{}
 _props|{"name": "Program1", "dbgap_accession_number": "123"}
 node_id|38373fbb-01da-5050-ba61-a3579eda3a37
+```
+Verify _project1_ exists in the DB
+```console
+$ psql -Atx postgresql://fence_user:fence_pass@localhost/metadata_db
+psql (13.1, server 9.6.20)
+Type "help" for help.
+
+metadata_db=# select * from node_project;
+created|2020-12-16 21:58:36.833556+00
+acl|{}
+_sysan|{}
+_props|{"code": "P1", "name": "project1", "state": "open", "dbgap_accession_number": "phs1"}
+node_id|49a949ef-60e1-5dba-84b9-7e3b2d37cdaf
 ```
 
 
