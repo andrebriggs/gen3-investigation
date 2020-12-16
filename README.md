@@ -4,9 +4,10 @@
 ## Local Setup Quickstart
 
 ### Prerequisites
-* [Increase](https://docs.docker.com/docker-for-mac/#resources) the Docker LinuxVM memory to atleast 3 to 4 GB (or else loading the portal will take a very long time)
+* **Important:** [Increase](https://docs.docker.com/docker-for-mac/#resources) the Docker LinuxVM memory to atleast 3 to 4 GB (or else loading the portal will take a very long time or crash)
 * [Create](https://github.com/uc-cdis/compose-services#setting-up-google-oauth-client-id-for-fence) a Google OAUTH client id and password.
-* Install [Kitematic](https://kitematic.com) to view Docker logs
+* Install [Kitematic](https://kitematic.com) or have [Docker Dashboard](https://docs.docker.com/desktop/dashboard/) to view Docker logs
+* Install [PSequel](http://www.psequel.com) or another PostgreSQL querying application
 * AWS Account (Use a free tier)
 
 ### Setup
@@ -22,7 +23,12 @@
     }
 ```
 6. Comment out the YAML node at `services.kibana-service` in `./docker-compose.yml`
-7. Replace `yourlogin1@gmail.com` with the email address you used to create the Google OAUTH client in `./Secrets/user.yaml`
+7. Uncomment the `services.postgres.ports` node in `./docker-compose.yml` to in to allow connecting to the local Postgres DB
+```yaml
+    ports:
+     - 5432:5432
+```
+8. Replace `yourlogin1@gmail.com` with the email address you used to create the Google OAUTH client in `./Secrets/user.yaml`
 
 ### Run Docker Compose
 1. Run `docker-compose up -d`
@@ -39,6 +45,13 @@
 ### Visit Your Program
 1. Visit `https://localhost/Program1`
 2. Verify it exists
+3. **Optional but STRONGLY reccomended**: Check the database using `select * from node_program;`
+
+### Create Program
+1. While local instance is running, visit `https://localhost/Program1`
+2. Enable _User Form Submission_ button and select _project_ from drop-down 
+3. Enter _P1_, _phs1_, and _project1_ ![image](images/program.png)
+4. Click _Upload submission json from form_ and see the green result. Note: You may have to hit the button SEVERAL times to see the green result. ![image](images/program_1.png) 
 
 ### Generate Test Metadata
 1. Generate test metadata
@@ -114,6 +127,22 @@ In the screenshot below you can see the 25 files that got uploaded. Click the _M
 
 `docker exec -it compose-services_postgres_1 bash` 
 
-`psql -Atx postgresql://fence_user:fence_pass@localhost/fence_db`
+`psql -Atx postgresql://fence_user:fence_pass@localhost/metadata_db`
+
+Verify _Program1_ exists in the DB
+```console
+$ psql -Atx postgresql://fence_user:fence_pass@localhost/metadata_db
+psql (13.1, server 9.6.20)
+Type "help" for help.
+
+metadata_db=# select * from node_program;
+created|2020-12-12 18:19:57.683685+00
+acl|{}
+_sysan|{}
+_props|{"name": "Program1", "dbgap_accession_number": "123"}
+node_id|38373fbb-01da-5050-ba61-a3579eda3a37
+```
+
+
 
 
