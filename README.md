@@ -1,6 +1,5 @@
 # Learning Gen3
 
-
 ## Local Setup Quickstart
 
 ### Prerequisites
@@ -95,7 +94,14 @@ $ docker run -it -v "${TEST_DATA_PATH}:/mnt/data" --rm --name=dsim --entrypoint=
 2. Click _Upload file_ and choose the `core_metadata_collection.json` file from the `/testData` directory ![image](images/project_upload.png)
 3. Click _Submit_ and make sure you see a Success 200 message ![image](images/project_upload_1.png)
 4. **Optional:** Repeat steps 2 and 3 for other test metadata files. For instance after `experiment.json` and `experimental_metadata.json` have been uploaded you should see the following at https://localhost/Program1-P1  ![image](images/project_upload_2.png)
+5. You are done with this setup guide.
 
+### Recap
+* We started the Gen3 environment, then created a program and project. 
+* Then we uploaded _metadata_ that fit into the project data model. 
+* We did NOT upload any data (e.g. images, documents, etc) files.
+
+---
 <!-- ### Download and configure up Gen3 Client
 ```console
 $ ./gen3-client configure --profile=cse_profile --cred=~/Downloads/credentials.json --apiendpoint=http://localhost/
@@ -156,12 +162,13 @@ From https://gen3.org/resources/user/gen3-client/#3-upload-data-files:
 
 In the screenshot below you can see the 25 files that got uploaded. Click the _Map My Files button_
 ![image](images/submission.png) -->
+## Known Issues
+* In a local setup if you try to upload _data_ files (via Gen3 client) you will see a status of _generating..._ at https://localhost/submission/files. This is because the data file upload process needs AWS SNS & SQS to trigger a job (see Slack [here](https://cdis.slack.com/archives/CDDPLU1NU/p1580764187092100?thread_ts=1580763342.092000) and [here](https://cdis.slack.com/archives/CDDPLU1NU/p1590767430357200?thread_ts=1590733336.355100&cid=CDDPLU1NU)).
 
 ## Appendix
 
 ### Questions
 * Mapping of files seems to be a very manual process. Is there a way to do bulk mapping of metadata to files (blobs) offline then just import once?
-* In the local setup AWS components (SQS, Lambda?) are needed to have a blob upload. Is there a way to simulate this?
 
 ### Debug Postgres
 
