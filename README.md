@@ -51,19 +51,52 @@
 1. While local instance is running, visit `https://localhost/Program1`
 2. Enable _User Form Submission_ button and select _project_ from drop-down 
 3. Enter _P1_, _phs1_, and _project1_ ![image](images/program.png)
-4. Click _Upload submission json from form_ and see the green result. Note: You may have to hit the button SEVERAL times to see the green result. ![image](images/program_1.png)
-5. Verify your project is Created by clicking the blue Details button and/or checking the databse with `select * from node_project;`
+4. Click _Upload submission json from form_ and see the green result. Note: You may have to hit the button **SEVERAL** times to see the green result. ![image](images/program_1.png)
+5. Verify your project is Created by clicking the blue Details button and/or checking the database with `select * from node_project;`
+
+### Update user.yaml
+1. Under `authz.resources` path in the `Secrets/user.yaml` file, replace the _Old_ with the _New_, using the program name `Program1` value and project code `P1`
+```yaml
+# Old
+  - name: programs
+    subresources:
+    - name: MyFirstProgram
+      subresources:
+      - name: projects
+        subresources:
+        - name: MyFirstProject
+```
+
+```yaml
+# New - NOTE that Gen3 config demands P1 which is the project CODE not NAME
+  - name: programs
+    subresources:
+    - name: Program1
+      subresources:
+      - name: projects
+        subresources:
+        - name: P1
+```
+2. Under `authz.policies` find the id `MyFirstProject_submitter` and update the `resource_paths` value of `/programs/MyFirstProgram/projects/MyFirstProject` to be `/programs/Program1/projects/P1`  
+3. Refresh using `docker exec -it fence-service fence-create sync --arborist http://arborist-service --yaml user.yaml` to have the containers recognize the `user.yaml` changes 
 
 ### Generate Test Metadata
-1. Generate test metadata
+1. Generate test metadata for the `Program1` program and `P1` project
 ```console
 $ export TEST_DATA_PATH="$(pwd)/testData"
 $ mkdir -p "$TEST_DATA_PATH"
 
-$ docker run -it -v "${TEST_DATA_PATH}:/mnt/data" --rm --name=dsim --entrypoint=data-simulator quay.io/cdis/data-simulator:master simulate --url https://s3.amazonaws.com/dictionary-artifacts/datadictionary/develop/schema.json --path /mnt/data --program jnkns --project jenkins --max_samples 10
+$ docker run -it -v "${TEST_DATA_PATH}:/mnt/data" --rm --name=dsim --entrypoint=data-simulator quay.io/cdis/data-simulator:master simulate --url https://s3.amazonaws.com/dictionary-artifacts/datadictionary/develop/schema.json --path /mnt/data --program Progam1 --project P1 --max_samples 10
 ```
 
-### Download and configure up Gen3 Client
+### Upload Test Metadata to Project
+1. Visit https://localhost/submission and click _Submit Data_
+![image](images/submission.png)
+2. Click _Upload file_ and choose the `core_metadata_collection.json` file from the `/testData` directory ![image](images/project_upload.png)
+3. Click _Submit_ and make sure you see a Success 200 message ![image](images/project_upload_1.png)
+4. **Optional:** Repeat steps 2 and 3 for other test metadata files. For instance after `experiment.json` and `experimental_metadata.json` have been uploaded you should see the following at https://localhost/Program1-P1  ![image](images/project_upload_2.png)
+
+<!-- ### Download and configure up Gen3 Client
 ```console
 $ ./gen3-client configure --profile=cse_profile --cred=~/Downloads/credentials.json --apiendpoint=http://localhost/
 2020/12/12 14:47:41 Profile 'cse_profile' has been configured successfully.
@@ -90,9 +123,9 @@ If you get the above warning add the following to the end of your `Secrets/gitop
 * You will need to restart the `portal-service` using `docker-compose restart portal-service` or shutdown the entire docker compose environment using `docker-compose down` and then `docker-compose up -d`
 
 * After you log back in navigate to https://localhost/identity to verify you have access to resources
-![image](images/profile.png)
+![image](images/profile.png) -->
 
-### Upload test data using Gen3 client
+<!-- ### Upload test data using Gen3 client
 
 1. Use the test metadata you previously created at `/testData`
 2. Run the command `gen3-client upload --profile=cse_profile --upload-path=testData/`
@@ -114,22 +147,28 @@ Finished with 4 retries | 1
 Finished with 5 retries | 2
 Failed                  | 3
 TOTAL                   | 28
-```
+``` -->
 
-### Mapping uploaded test metadata
+<!-- ### Mapping uploaded test metadata
 
 From https://gen3.org/resources/user/gen3-client/#3-upload-data-files:
 > Files that have been successfully uploaded now have a GUID associated with them, and there is also an associated record in the indexd database. However, in order for the files to show up in the data portal, the files have to be registered in the PostgreSQL database. In other words, indexd records exist for the files, but sheepdog records (that is, structured metadata in the graph model) don’t exist yet. Thus, the files aren’t yet associated with any particular program, project, or node. To create the structured data records for the files via the sheepdog service, Windmill offers a “Map My Files” UI
 
 In the screenshot below you can see the 25 files that got uploaded. Click the _Map My Files button_
-![image](images/submission.png)
+![image](images/submission.png) -->
 
-**Debug Postgres**
+## Appendix
 
-`docker exec -it compose-services_postgres_1 bash` 
+### Questions
+* Mapping of files seems to be a very manual process. Is there a way to do bulk mapping of metadata to files (blobs) offline then just import once?
+* In the local setup AWS components (SQS, Lambda?) are needed to have a blob upload. Is there a way to simulate this?
 
-`psql -Atx postgresql://fence_user:fence_pass@localhost/metadata_db`
+### Debug Postgres
 
+1. If you did not expose the port in Docker Compose you can connect to the local Postgres container with `docker exec -it compose-services_postgres_1 bash`.
+2. Once inside the container run `psql -Atx postgresql://fence_user:fence_pass@localhost/metadata_db`
+
+**Alternatively**, if you are exposing the ports you can connect using psql from your main console window using the following:
 Verify _Program1_ exists in the DB
 ```console
 $ psql -Atx postgresql://fence_user:fence_pass@localhost/metadata_db
@@ -156,7 +195,11 @@ _sysan|{}
 _props|{"code": "P1", "name": "project1", "state": "open", "dbgap_accession_number": "phs1"}
 node_id|49a949ef-60e1-5dba-84b9-7e3b2d37cdaf
 ```
+### Links
 
+* [Gen3 Data Commons Setup - Part 1](https://www.youtube.com/watch?v=xM54O4aMpWY)
+* [Gen3 Data Commons Setup - Part 2](https://www.youtube.com/watch?v=iMmCxnbHpGo)
+* [Gen3 Data Commons - Data Upload Tutorial](https://www.youtube.com/watch?v=QxQKXlbFt00)
 
 
 
