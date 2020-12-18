@@ -4,6 +4,12 @@ https://github.com/uc-cdis/peregrine
 https://petstore.swagger.io/?url=https://raw.githubusercontent.com/uc-cdis/peregrine/master/openapis/swagger.yaml
 
 > Query interface to get insights into data in Gen3 Commons
+## Sequence
+<!-- ![image](https://static.swimlanes.io/96ba3c900b4ce3960d62b04484d0964f.png) -->
+<img src="https://static.swimlanes.io/96ba3c900b4ce3960d62b04484d0964f.png" width="800" />
+
+[Source](https://swimlanes.io/#jZJBTwIxEIXv+yt6hESW+8aYYLhgjKzBxGMztMNuobTLTFfdf28XlYVgjed+783rmwkmWCxEiYQVGYdiVi4KMa0Imvpgsyx7NU7vjbVicjdQUbBcvQzYIL+kGIMkBC1BKWSWDfktqsCjcVJS/VMyo7UnwyGGhTbU0z00jXHVGXQ7mZxR1+/Xc32D7megNPo65ur5UczvC5E7r5FHJfnYwH6cg7UXbD/6BPeu5ZfpYs7JAApUjVoYJzYWeJdX+W81JOUNEGNs7tAiB7ll7/4oGT9QtQFlhKlL/vLdhDqukNl4VySYb6fR0elGvAEZWFvkZBuE3NqQawiQjNenN5tOxkLUTiKRp34Xp1M8Gg74w2r5JErorAf9CQ==)
+
 
 ## Dependencies
 
