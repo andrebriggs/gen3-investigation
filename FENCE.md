@@ -8,6 +8,9 @@ cd fence
 docker build .
 ```
 
+## Sequence
+<img src="https://github.com/uc-cdis/fence/raw/master/docs/images/seq_diagrams/openid_connect_flow.png" width="800" />
+
 ## Dependencies
 
 * PostgreSQL DB

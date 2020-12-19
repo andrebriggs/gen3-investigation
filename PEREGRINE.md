@@ -5,8 +5,28 @@ https://petstore.swagger.io/?url=https://raw.githubusercontent.com/uc-cdis/pereg
 
 > Query interface to get insights into data in Gen3 Commons
 ## Sequence
-<!-- ![image](https://static.swimlanes.io/96ba3c900b4ce3960d62b04484d0964f.png) -->
 <img src="https://static.swimlanes.io/96ba3c900b4ce3960d62b04484d0964f.png" width="800" />
+
+<!-- In case things get changed on Swimlanes -->
+<!-- title: Peregrine API: /graphql
+
+
+Windmill -> Peregrine: POST /graphql
+Peregrine -> Peregrine: set_read_access_projects()
+Peregrine -> Peregrine: get_read_access_projects()
+Peregrine -> Arborist: /auth/mapping
+Peregrine <-- Arborist: mapping
+Peregrine -> Peregrine: get_open_project_ids()
+Peregrine -> PSQL DB: .nodes(Program).all()
+Peregrine <-- PSQL DB: openProjectIDs
+Peregrine -> Peregrine: cached in flask.g.read_access_projects
+Peregrine -> Peregrine: parse_request_json()
+Peregrine -> Peregrine: execute_query()
+Peregrine -> PSQL DB: with session:
+Peregrine -> PSQL DB: execute(query, variables)
+Peregrine <-- PSQL DB: result.data
+Peregrine -> Peregrine: jsonify_check_errors()
+Windmill <-- Peregrine: JSON Payload -->
 
 [Source](https://swimlanes.io/#jZJBTwIxEIXv+yt6hESW+8aYYLhgjKzBxGMztMNuobTLTFfdf28XlYVgjed+783rmwkmWCxEiYQVGYdiVi4KMa0Imvpgsyx7NU7vjbVicjdQUbBcvQzYIL+kGIMkBC1BKWSWDfktqsCjcVJS/VMyo7UnwyGGhTbU0z00jXHVGXQ7mZxR1+/Xc32D7megNPo65ur5UczvC5E7r5FHJfnYwH6cg7UXbD/6BPeu5ZfpYs7JAApUjVoYJzYWeJdX+W81JOUNEGNs7tAiB7ll7/4oGT9QtQFlhKlL/vLdhDqukNl4VySYb6fR0elGvAEZWFvkZBuE3NqQawiQjNenN5tOxkLUTiKRp34Xp1M8Gg74w2r5JErorAf9CQ==)
 
