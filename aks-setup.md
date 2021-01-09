@@ -37,3 +37,21 @@ https://github.com/uc-cdis/compose-services
 ## Paid alternatives to Gen3
 * [Data Biology](https://www.databiology.com/)
 * [Seven Bridges](https://www.sevenbridges.com/)
+
+
+```console
+az storage account create -n abriggen3storage -g abrig-gen3 -l westus --sku Standard_LRS
+```
+
+```console
+az storage queue create --name $queuename --account-name $storagename
+```
+
+```console
+# Enable Event grid
+az provider register --namespace Microsoft.EventGrid
+```
+
+For `ssjdispatcher` version for Azure blobs we have a few approaches
+* Setup Azure storage account
+* Setu

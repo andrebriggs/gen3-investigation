@@ -18,3 +18,10 @@ https://uc-cdis.github.io/sheepdog/build/html/index.html
 ## Notes 
 * Has hard coded S3 references
 * The data model refers to Gen3 model and data dictionary
+
+## Swagger API
+* http://petstore.swagger.io/?url=https://raw.githubusercontent.com/uc-cdis/sheepdog/master/openapi/swagger.yml
+
+On localhost you can call things like:
+* **GET** all entities https://localhost/api/v0/submission/_dictionary/_all
+* **GET** all slides https://localhost/api/v0/submission/_dictionary/slide

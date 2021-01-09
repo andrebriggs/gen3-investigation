@@ -16,3 +16,10 @@ https://github.com/uc-cdis/arborist
 
 ## Notes
 * Doesn't seem to have any cloud specific dependencies
+
+## Swagger API
+* https://petstore.swagger.io/?url=https://raw.githubusercontent.com/uc-cdis/arborist/master/docs/openapi.yaml
+
+
+Example query for `compose-services` local deployment:
+`curl -k -H "accept: application/json"  -X GET "https://localhost/authz/mapping?username=REPLACE_ME"`

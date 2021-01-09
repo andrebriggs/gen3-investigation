@@ -38,5 +38,19 @@ In depth:
   * Get and list jobs
   * Health endpoint
 
+Note: this service holds a list of JobInfos in memory. What happens if this stateless pod crashes? Maybe it uses k8s job logs as state
+
+Issue: The `fence` job use case seems hacky. You upload a `user.yaml` file to a bucket/container and this service creates a job to run the `fence` image with `user.yaml` to update configuration? User.yaml is structured metadata. Why not explicitly update configuration via GitOps?
+
 
 <!-- https://swimlanes.io/#fZCxTsQwEER7f8WUd5FSpUERCgU1EoIfSLDnLnsYO+d1Dvh7nIQmFGy12p15O9os2bOF6sWJTkO2IxMk4P1OjTHaoK67DnrVomnAG0MGw3XmTH0wZY77eu9u8Ry9V3xKHtG/0FJufKLqcObh2MPsb238PUBO+NgMCn6JZsxKjENwnkmRI6YUbVH8ZXVL7haPiUPm0uMS3w56NEu7Xlr3r0XtZl/oVVXISb+DrapF+5v6xGDZY4ruH6cEV8KF8865DrWxXsqnNkKpHw== -->
+
+<!-- What an int test would look like:
+
+Push a file to Azure Blob storage (or directly to the queue)
+Expect an event is pushed to Azure queue
+dispatcher is loaded with configs to pull item from queue
+Assert blob pattern
+
+If blob pattern matches config assert a k8s job yaml is created
+Validate the job yaml (so you don't need to go to the k8s server) -->
