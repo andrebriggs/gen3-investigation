@@ -33,9 +33,17 @@ $ docker exec esproxy-service curl -X DELETE http://localhost:9200/etl-array-con
    3. If you have errors from the previous step (Elasticsearch docker image crashes or errors from run), check Docker image logs for `esproxy-service` and `spark-service` to debug. Also check Elasticsearch to see if indicies where created. 
 6. If successful, run `docker container start guppy-service`
 7. Finally, visit https://localhost/files and you should see data loaded on the page ![image](images/files.png)
+8. For extra credit you can visit your Elasticsearch instance after step 5 to make sure indicies got created. If if the health is yellow it should be things worked. Notice the `docs.count` corresponds to the number of files that display on the page:
+```
+health status index               uuid                   pri rep docs.count docs.deleted store.size pri.store.size
+green  open   .kibana_1           eFEg2DMCTNmJUfYS31LraA   1   0          0            0       230b           230b
+yellow open   file-array-config_0 BKDMRHyyS_Gw4y3hRN8smg   5   1          1            0        4kb            4kb
+yellow open   etl-array-config_0  gghK-sI2SsOyFiikSaD7jw   5   1          1            0      4.1kb          4.1kb
+yellow open   etl_0               0C3rhjcPRfOmO07Mv_eGPw   5   1         10            0     96.8kb         96.8kb
+yellow open   file_0              l1CVwDY3R5iaOCqT5gf4Aw   5   1         13            0      123kb          123kb
+```
 
 ## Additional Notes
-
 * The most frustrating thing here is that you may have to retry somethings. A docker image but kill itself but when you retry it works.
 * You might see errors about `ModuleNotFoundError: No module named 'gdcdictionary'` when runnng `docker exec tube-service bash -c "python run_etl.py"`. Apparently this is a [well known issue](https://cdis.slack.com/archives/CDDPLU1NU/p1600095801039800) on the Slack channel but apparently it is harmless. You can run `docker exec tube-service bash -c "pip3 install gdcdictionary"` first to eliminate the errors.
 
