@@ -26,3 +26,6 @@ https://github.com/uc-cdis/indexd
 * Can access indexd API via basic auth (username/password) or using `fence`/`arborist`
 * Used by `sheepdog`
   * *"When data files are submitted to a Gen3 Data Commons using Sheepdog, the files are automatically indexed into Indexd. Submissions to Sheepdog can include object_id's that map to existing Indexd GUIDs. Or, if there are no existing records, Sheepdog can create them on the fly."*
+
+## Swagger API
+* https://petstore.swagger.io/?url=https://raw.githubusercontent.com/uc-cdis/indexd/master/openapis/swagger.yaml

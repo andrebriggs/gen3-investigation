@@ -170,6 +170,9 @@ In the screenshot below you can see the 25 files that got uploaded. Click the _M
 ### Questions
 * Mapping of files seems to be a very manual process. Is there a way to do bulk mapping of metadata to files (blobs) offline then just import once?
 
+### Verify local Index Service is healthy
+* Visit https://localhost/index/index/ or https://localhost/index/_status
+
 ### Debug Postgres
 
 1. If you did not expose the port in Docker Compose you can connect to the local Postgres container with `docker exec -it compose-services_postgres_1 bash`.
