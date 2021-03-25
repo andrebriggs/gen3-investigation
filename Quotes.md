@@ -11,3 +11,7 @@ On communicating via Slack channel
 
 From [Gen3 maintainer](https://cdis.slack.com/archives/CDDPLU1NU/p1594925970095400?thread_ts=1594906513.085900&cid=CDDPLU1NU):
 > "our documentation is really lacking...you have to understand the system on at least 3 levels...infrastructure - the terraform stuff...being able to configure and launch the various services onto the kubernetes cluster...once it's finally running - being able to actually use the system to effectively share data with a community...all 3 levels are pretty complicated 🤦🏿‍♂️"
+> 
+
+A biased definition of a data commons:
+> A datalake with an interoperable data model
